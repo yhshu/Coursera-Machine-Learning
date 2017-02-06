@@ -10,8 +10,8 @@ m = length(y); % number of training examples
 J = 0;
 
 % ====================== YOUR CODE HERE ======================
-    predictions = X * theta;  
-    J = 1/(2*m)*(predictions - y)' * (predictions - y);  
+predictions = X * theta;  
+J = 1/(2*m)*(predictions - y)' * (predictions - y);  
 	
 % =========================================================================
 

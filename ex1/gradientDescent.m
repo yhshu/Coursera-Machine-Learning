@@ -10,8 +10,8 @@ J_history = zeros(num_iters, 1);
 for iter = 1:num_iters
 
     % ====================== YOUR CODE HERE ======================
-	temp1=theta(1)-(alpha/m)*sum((X*theta-y).*X(:,1));
-	temp2=theta(2)-(alpha/m)*sum((X*theta-y).*X(:,2));  
+	temp1 = theta(1)-(alpha/m)*sum((X*theta-y).*X(:,1));
+	temp2 = theta(2)-(alpha/m)*sum((X*theta-y).*X(:,2));  
     theta(1) = temp1;  
     theta(2) = temp2;  
 
