@@ -29,12 +29,12 @@
 %% ================ Part 1: Feature Normalization ================
 
 %% Clear and Close Figures
-clear ; close all; clc
+clear all; close all; clc
 
 fprintf('Loading data ...\n');
 
 %% Load Data
-data = load('ex1data2.txt');
+data = csvread('ex1data2.txt');
 X = data(:, 1:2);
 y = data(:, 3);
 m = length(y);
@@ -82,8 +82,8 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
-num_iters = 400;
+alpha = 0.3;
+num_iters = 100;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
