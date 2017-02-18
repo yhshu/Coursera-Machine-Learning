@@ -19,7 +19,7 @@ for iter = 1:num_iters
     %
 
 	H = X * theta; % m组数据，n个特征，X是m*n的矩阵，theta是(n+1)*1的矩阵，H和y是m*1的矩阵
-	T = zeros(n , 1);
+	T = zeros(n , 1); % T用于求和
 	for i = 1 : m,
 		T = T + (H(i) - y(i)) * X(i,:)';	
 	end

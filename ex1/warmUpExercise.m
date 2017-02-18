@@ -9,14 +9,8 @@ A = [];
 %               represent the return values (at the top of the file)
 %               and then set them accordingly. 
 
-
-
-
-
-
-
 % ===========================================
-A = eye(5);
+A = eye(5); % A是秩为5的单位矩阵
 
 
 end
