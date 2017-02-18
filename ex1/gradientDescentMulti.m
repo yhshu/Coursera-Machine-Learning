@@ -5,7 +5,7 @@ function [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters
 
 % Initialize some useful values
 m = length(y); % number of training examples
-n = size(X , 2);
+n = size(X , 2);% n-1个特征，即x前的系数和1个常数
 J_history = zeros(num_iters, 1);
 
 for iter = 1:num_iters
@@ -18,10 +18,10 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-	H = X * theta; % m组数据，n个特征，X是m*n的矩阵，theta是(n+1)*1的矩阵，H和y是m*1的矩阵
-	T = zeros(n , 1); % T用于求和
+	H = X * theta; % m组数据，n-1个特征，X是m*n的矩阵，theta是n*1的矩阵，H和y是m*1的矩阵
+	T = zeros(n,1); % T用于求和，T和theta维度相同
 	for i = 1 : m,
-		T = T + (H(i) - y(i)) * X(i,:)';	
+		T = T + (H(i) - y(i)) * X(i,:)';	% 取X第i行，转置
 	end
 	
 	theta = theta - (alpha * T) / m; % alpha是学习率

@@ -30,7 +30,7 @@ clear all; close all; clc
 % Complete warmUpExercise.m 
 fprintf('Running warmUpExercise ... \n');
 fprintf('5x5 Identity Matrix: \n');
-warmUpExercise()
+warmUpExercise();
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
