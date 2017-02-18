@@ -17,13 +17,13 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-	H = X * theta;
-	T = [0 ; 0];
+	H = X * theta; % m组数据，1个特征，X是m*1的矩阵，theta是2*1的矩阵，H和y是m*1的矩阵
+	T = [0 ; 0];% T用于求和，0是第1个数字，T是1*1的矩阵
 	for i = 1 : m,
-		T = T + (H(i) - y(i)) * X(i,:)';	
+		T = T + (H(i) - y(i)) * X(i,:)';
 	end
 	
-	theta = theta - (alpha * T) / m;
+	theta = theta - (alpha * T) / m; % alpha是学习率
 	
     % ============================================================
 
