@@ -18,9 +18,9 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 %
 % Note: grad should have the same dimensions as theta
-Hx=sigmoid(X*theta);
-J=1/m*(-y'*log(Hx)-(1-y')*log(1-Hx));
-grad=1/m*((Hx-y)'*X);
+Hx=sigmoid(X*theta);  % X是m*2的矩阵，theta是逻辑斯蒂函数中的一个变量，Hx是m*2的矩阵
+J= 1/m * ( -y'*log(Hx)- (1-y')*log(1-Hx) ); % 逻辑斯蒂回归的成本函数
+grad=1/m * ((Hx-y)'*X); % theta下降的梯度
 
 % =============================================================
 

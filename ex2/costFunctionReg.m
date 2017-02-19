@@ -16,10 +16,10 @@ grad = zeros(size(theta));
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
-Hx=sigmoid(X*theta);
-J=1/m*(-y'*log(Hx)-(1-y')*log(1-Hx))+lambda/(2*m)*(theta(2:end)'*theta(2:end));  
+Hx = sigmoid(X*theta);
+J = 1/m * ( -y'*log(Hx) - (1-y')*log(1-Hx) )+ lambda/(2*m) * (theta(2:end)'*theta(2:end));  %正则化调整成本函数
 
-grad=1/m*((Hx-y)'*X)+lambda/m*theta';   
+grad = 1/m * ((Hx-y)'*X) + lambda/m*theta'; %正则化调整梯度  
 grad(1)=grad(1)-lambda/m *theta(1); 
 
 % =============================================================
