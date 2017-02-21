@@ -8,7 +8,7 @@ g = zeros(size(z));
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the sigmoid of each value of z (z can be a matrix,
 %               vector or scalar).
-g = ones(size(z))./(ones(size(z))+(exp(1)*ones(size(z))).^(-1*z)); %实现sigmoid函数
+g = 1 ./ (1 + e.^(-z)); %实现sigmoid函数
 % =============================================================
 
 end
