@@ -61,7 +61,7 @@ pause;
 X = [ones(m, 1) X];
 
 % Initialize fitting parameters
-initial_theta = zeros(n + 1, 1);
+initial_theta = zeros(n + 1, 1);%theta是(n+1)*1的矩阵
 
 % Compute and display initial cost and gradient
 [cost, grad] = costFunction(initial_theta, X, y);
@@ -91,7 +91,7 @@ pause;
 %  optimal parameters theta.
 
 %  Set options for fminunc
-options = optimset('GradObj', 'on', 'MaxIter', 400);
+options = optimset('GradObj', 'on', 'MaxIter', 400);%最多迭代400次
 
 %  Run fminunc to obtain the optimal theta
 %  This function will return theta and the cost 
