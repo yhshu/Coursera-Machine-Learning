@@ -9,7 +9,9 @@ function [J grad] = nnCostFunction(nn_params, ...
 %   X, y, lambda) computes the cost and gradient of the neural network. The
 %   parameters for the neural network are "unrolled" into the vector
 %   nn_params and need to be converted back into the weight matrices. 
-% 
+%	
+%	nnCostFunction函数用于计算神经网络的成本和梯度。神经网络的参数没有被展开到向量nn_params里，需要被转换回权重矩阵。
+%
 %   The returned parameter grad should be a "unrolled" vector of the
 %   partial derivatives of the neural network.
 %
