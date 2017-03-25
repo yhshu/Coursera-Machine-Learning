@@ -67,8 +67,8 @@ Theta2_grad = zeros(size(Theta2));
 %% 对y进行处理 Y(find(y==3))= [0 0 1 0 0 0 0 0 0 0]; 用于 Feedforward cost function 1和2
 Y=[];
 E = eye(num_labels);    
-% 要满足K可以是任意，则不能写eye(10)！！
-for i=1:num_labels
+% 要满足K可以是任意，则不能写E = eye(10)！
+for i = 1:num_labels
     Y0 = find(y==i);    % 找到等于y=i的序列号,替换向量
     Y(Y0,:) = repmat(E(i,:),size(Y0,1),1);
 end
