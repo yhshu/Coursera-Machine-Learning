@@ -36,8 +36,8 @@ load('ex3data1.mat'); % training data stored in arrays X, y
 m = size(X, 1);
 
 % Randomly select 100 data points to display
-rand_indices = randperm(m);
-sel = X(rand_indices(1:100), :);
+rand_indices = randperm(m); % randperm函数用于随机打乱一个数字序列。
+sel = X(rand_indices(1:100), :); % 取100行所有的列
 
 displayData(sel);
 
@@ -74,7 +74,7 @@ pause;
 fprintf('\nTraining One-vs-All Logistic Regression...\n')
 
 lambda = 0.1;
-[all_theta] = oneVsAll(X, y, num_labels, lambda);
+[all_theta] = oneVsAll(X, y, num_labels, lambda); % 每一种要区分的类型存有一组权重向量theta。
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;

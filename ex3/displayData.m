@@ -6,7 +6,7 @@ function [h, display_array] = displayData(X, example_width)
 
 % Set example_width automatically if not passed in
 if ~exist('example_width', 'var') || isempty(example_width) 
-	example_width = round(sqrt(size(X, 2)));
+	example_width = round(sqrt(size(X, 2))); % round 四舍五入。
 end
 
 % Gray Image
@@ -21,7 +21,7 @@ display_rows = floor(sqrt(m));
 display_cols = ceil(m / display_rows);
 
 % Between images padding
-pad = 1;
+pad = 1; % 图像之间分隔1个像素。
 
 % Setup blank display
 display_array = - ones(pad + display_rows * (example_height + pad), ...
