@@ -58,7 +58,7 @@ for k = 1:num_labels % 循环num_labels次，循环一次区分出每一种类�
     options = optimset('GradObj','on','MaxIter',50);
 	%最多迭代50次。
     [theta] = fmincg( @(t)(lrCostFunction(t, X, (y==k), lambda)), initial_theta, options);
-	% @是方法指针，(t)是返回值。(y==k)是遍历。
+	% 此处使用了函数句柄。@是方法指针。(y==k)是遍历。
 	%使用lrCostFunction计算该样本在逻辑回归中的theta
     all_theta(k , :) = theta' ;%记录当前样本得到的theta
 end  
