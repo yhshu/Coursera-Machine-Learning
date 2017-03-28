@@ -1,12 +1,13 @@
 function checkNNGradients(lambda)
 %CHECKNNGRADIENTS Creates a small neural network to check the
 %backpropagation gradients
+%这个函数创造一个小型神经网络用于检验反向传播梯度。
 %   CHECKNNGRADIENTS(lambda) Creates a small neural network to check the
 %   backpropagation gradients, it will output the analytical gradients
 %   produced by your backprop code and the numerical gradients (computed
 %   using computeNumericalGradient). These two gradient computations should
 %   result in very similar values.
-%
+%	这个函数会通过反向传播代码和数值梯度输出分析梯度。这两个梯度最终应该非常相似。
 
 if ~exist('lambda', 'var') || isempty(lambda)
     lambda = 0;
