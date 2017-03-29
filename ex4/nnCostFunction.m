@@ -18,6 +18,7 @@ function [J grad] = nnCostFunction(nn_params, ...
 
 % Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
 % for our 2 layer neural network
+% 重塑神经网络的权重矩阵。
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
@@ -25,7 +26,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
                  num_labels, (hidden_layer_size + 1));
 
 % Setup some useful variables
-m = size(X, 1);
+m = size(X, 1); % m是X的行数，即样本数量。
          
 % You need to return the following variables correctly 
 J = 0;
@@ -41,23 +42,31 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 %
+%			前向传播神经网络并返回在变量J中的成本。
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
 %         Theta2_grad, respectively. After implementing Part 2, you can check
 %         that your implementation is correct by running checkNNGradients
 %
+%			执行反向传播算法来计算梯度Theta1_grad 和 Theta2_grad。你应该分别返回成本函数
+%			的两个偏导数。执行完这个部分，你能通过执行checkNNGradients检查操作的正确性。
+%			
 %         Note: The vector y passed into the function is a vector of labels
 %               containing values from 1..K. You need to map this vector into a 
 %               binary vector of 1's and 0's to be used with the neural network
 %               cost function.
+%				传入函数的y向量包含1到K的值，你需要将这个向量转换为二元的由0和1
+%				组成的，这样能够被神经网络的成本函数所用。
 %
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+%				
+%				如果你第一次执行的话，我们建议对训练集使用for循环执行反向传播。
 %
 % Part 3: Implement regularization with the cost function and gradients.
-%
+%			执行有成本函数和梯度的正则化。
 %         Hint: You can implement this around the code for
 %               backpropagation. That is, you can compute the gradients for
 %               the regularization separately and then add them to Theta1_grad
@@ -86,9 +95,9 @@ end
 
 %% regularized Feedforward cost function lambda=1
 % 计算前向传输 Add ones to the X data matrix  -jin
-X = [ones(m, 1) X];
+X = [ones(m, 1) X];			%第一层加入偏置神经元
 a2 = sigmoid(X * Theta1');   % 第二层激活函数输出
-a2 = [ones(m, 1) a2];        % 第二层加入b
+a2 = [ones(m, 1) a2];        % 第二层加入偏置神经元
 a3 = sigmoid(a2 * Theta2');  
 
 temp1 = [zeros(size(Theta1,1),1) Theta1(:,2:end)];   % 先把theta(1)拿掉，不参与正则化
@@ -136,7 +145,7 @@ Theta2_grad = 1 / m * delta_2 + lambda/m * Theta2_temp ;
 
 % =========================================================================
 
-% Unroll gradients
+% Unroll gradients 展示梯度
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 
