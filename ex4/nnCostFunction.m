@@ -102,11 +102,11 @@ a3 = sigmoid(a2 * Theta2');
 
 temp1 = [zeros(size(Theta1,1),1) Theta1(:,2:end)];   % 先把theta(1)拿掉，不参与正则化
 temp2 = [zeros(size(Theta2,1),1) Theta2(:,2:end)];
-temp1 = sum(temp1 .^2);     % 计算每个参数的平方，再就求和
+temp1 = sum(temp1 .^2);     % 计算每个参数的平方，再求和
 temp2 = sum(temp2 .^2);
 
 cost = Y .* log(a3) + (1 - Y ) .* log( (1 - a3));  % cost是m*K(5000*10)的结果矩阵  sum(cost(:))全部求和
-J= -1 / m * sum(cost(:)) + lambda/(2*m) * ( sum(temp1(:))+ sum(temp2(:)) );  
+J= -1 / m * sum(cost(:)) + lambda/(2*m) * ( sum(temp1(:))+ sum(temp2(:)) );  % 带正则化的成本函数
 
 
 %% 计算 Gradient 
