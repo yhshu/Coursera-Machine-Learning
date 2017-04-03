@@ -9,9 +9,8 @@ function [J grad] = nnCostFunction(nn_params, ...
 %   X, y, lambda) computes the cost and gradient of the neural network. The
 %   parameters for the neural network are "unrolled" into the vector
 %   nn_params and need to be converted back into the weight matrices. 
-%	
+% 
 %	nnCostFunction函数用于计算神经网络的成本和梯度。神经网络的参数没有被展开到向量nn_params里，需要被转换回权重矩阵。
-%
 %   The returned parameter grad should be a "unrolled" vector of the
 %   partial derivatives of the neural network.
 %
@@ -26,7 +25,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
                  num_labels, (hidden_layer_size + 1));
 
 % Setup some useful variables
-m = size(X, 1); % m是X的行数，即样本数量。
+m = size(X, 1);% m是X的行数，即样本数量。
          
 % You need to return the following variables correctly 
 J = 0;
@@ -73,75 +72,62 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-%% 对y进行处理 Y(find(y==3))= [0 0 1 0 0 0 0 0 0 0]; 用于 Feedforward cost function 1和2
-Y=[];
-E = eye(num_labels);    
-% 要满足K可以是任意，则不能写E = eye(10)！
-for i = 1:num_labels
-    Y0 = find(y==i);    % 找到等于y=i的序列号,替换向量
-    Y(Y0,:) = repmat(E(i,:),size(Y0,1),1);
-end
+X = [ones(m , 1)  X];
 
-%% unregularized Feedforward cost function lambda=0
-% % 计算前向传输 Add ones to the X data matrix  -jin
-% X = [ones(m, 1) X];
-% a2 = sigmoid(X * Theta1');   % 第二层激活函数输出
-% a2 = [ones(m, 1) a2];        % 第二层加入b
-% a3 = sigmoid(a2 * Theta2');  
+% Part 1: CostFunction 成本函数
+% -------------------------------------------------------------
 
-% cost = Y .* log(a3) + (1 - Y ) .* log( (1 - a3));  
-% cost是m*K(5000*10)的结果矩阵  sum(cost(:))全部求和
-% J= -1 / m * sum(cost(:));   
+a1 = X; %输入层
+z2 = a1*Theta1'; %第二层输入
+a2 = sigmoid(z2); %第二层输出
+a2 = [ones(m , 1)  a2]; %加入偏置神经元
+a3 = sigmoid(a2*Theta2'); %输出层
 
-%% regularized Feedforward cost function lambda=1
-% 计算前向传输 Add ones to the X data matrix  -jin
-X = [ones(m, 1) X];			%第一层加入偏置神经元
-a2 = sigmoid(X * Theta1');   % 第二层激活函数输出
-a2 = [ones(m, 1) a2];        % 第二层加入偏置神经元
-a3 = sigmoid(a2 * Theta2');  
+ry = eye(num_labels)(y,:);
 
-temp1 = [zeros(size(Theta1,1),1) Theta1(:,2:end)];   % 先把theta(1)拿掉，不参与正则化
-temp2 = [zeros(size(Theta2,1),1) Theta2(:,2:end)];
-temp1 = sum(temp1 .^2);     % 计算每个参数的平方，再求和
-temp2 = sum(temp2 .^2);
+cost = ry.*log(a3) + (1 - ry).*log(1 - a3); %计算成本
+J = -sum(sum(cost,2)) / m;
 
-cost = Y .* log(a3) + (1 - Y ) .* log( (1 - a3));  % cost是m*K(5000*10)的结果矩阵  sum(cost(:))全部求和
-J= -1 / m * sum(cost(:)) + lambda/(2*m) * ( sum(temp1(:))+ sum(temp2(:)) );  % 带正则化的成本函数
+reg = sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(: , 2:end).^2));
 
-
-%% 计算 Gradient 
-delta_1 = zeros(size(Theta1));
-delta_2 = zeros(size(Theta2));
-
-for t = 1:m
-   % step 1
-   a_1 = X(t,:)';          
-%        a_1 = [1 ; a_1];
-   z_2 = Theta1 * a_1;   
-   a_2 = sigmoid(z_2);  
-      a_2 = [1 ; a_2];
-   z_3 = Theta2 * a_2;
-   a_3 = sigmoid(z_3);
-   % step 2
-   err_3 = zeros(num_labels,1);
-   for k = 1:num_labels     
-      err_3(k) = a_3(k) - (y(t) == k);
-   end
-   % step 3
-   err_2 = Theta2' * err_3;                % err_2有26行！！！
-   err_2 = err_2(2:end) .* sigmoidGradient(z_2);   % 去掉第一个误差值，减少为25. sigmoidGradient(z_2)只有25行！！！
-   % step 4
-   delta_2 = delta_2 + err_3 * a_2';
-   delta_1 = delta_1 + err_2 * a_1';
-end
-
-% step 5
-Theta1_temp = [zeros(size(Theta1,1),1) Theta1(:,2:end)];
-Theta2_temp = [zeros(size(Theta2,1),1) Theta2(:,2:end)];
-Theta1_grad = 1 / m * delta_1 + lambda/m * Theta1_temp;
-Theta2_grad = 1 / m * delta_2 + lambda/m * Theta2_temp ;
+J = J + lambda/(2*m)*reg; %正则化
 
 % -------------------------------------------------------------
+
+% Part 2: Backpropagation algorithm 反向传播
+% -------------------------------------------------------------
+
+
+delta3 = a3 - ry;
+delta2 = (delta3*Theta2)(:,2:end) .* sigmoidGradient(z2);
+
+Delta1 = delta2'*a1;
+Delta2 = delta3'*a2;
+
+Theta1_grad = Delta1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m;
+Theta2_grad = Delta2 / m + lambda*[zeros(num_labels , 1) Theta2(:,2:end)] / m;
+
+%G1 = zeros(size(Theta1));
+%G2 = zeros(size(Theta2));
+%for i = 1 : m,
+%	ra1 = X(i,:)';
+%	rz2 = Theta1*ra1;
+%	ra2 = sigmoid(rz2);
+%	ra2 = [1;ra2];
+%	rz3 = Theta2*ra2;
+%	ra3 = sigmoid(rz3);
+	
+%	err3 = ra3 - ry(i,:)';
+	
+%	err2 = (Theta2'*err3)(2:end , 1) .* sigmoidGradient(rz2);
+	
+%	G1 = G1 + err2 * ra1';
+%	G2 = G2 + err3 * ra2';
+%end
+
+
+%Theta1_grad = G1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m;
+%Theta2_grad = G2 / m + lambda*[zeros(num_labels , 1) Theta2(:,2:end)] / m;
 
 % =========================================================================
 
