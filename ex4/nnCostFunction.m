@@ -29,8 +29,8 @@ m = size(X, 1);% m是X的行数，即样本数量。
          
 % You need to return the following variables correctly 
 J = 0;
-Theta1_grad = zeros(size(Theta1));
-Theta2_grad = zeros(size(Theta2));
+Theta1_grad = zeros(size(Theta1)); % Theta1的梯度
+Theta2_grad = zeros(size(Theta2)); % Theta2的梯度
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
@@ -81,12 +81,12 @@ a1 = X; %输入层
 z2 = a1*Theta1'; %第二层输入
 a2 = sigmoid(z2); %第二层输出
 a2 = [ones(m , 1)  a2]; %加入偏置神经元
-a3 = sigmoid(a2*Theta2'); %输出层
+a3 = sigmoid(a2*Theta2'); %输出层 5000x10的矩阵
 
-ry = eye(num_labels)(y,:);
+ry = eye(num_labels)(y,:); % ry是5000x10的矩阵，y是5000x1的矩阵。
 
-cost = ry.*log(a3) + (1 - ry).*log(1 - a3); %计算成本
-J = -sum(sum(cost,2)) / m;
+cost = ry.*log(a3) + (1 - ry).*log(1 - a3); % 最大似然法。
+J = -sum(sum(cost,2)) / m; % 成本函数。
 
 reg = sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(: , 2:end).^2));
 
@@ -98,13 +98,15 @@ J = J + lambda/(2*m)*reg; %正则化
 % -------------------------------------------------------------
 
 
-delta3 = a3 - ry;
+delta3 = a3 - ry; %第三层的误差
 delta2 = (delta3*Theta2)(:,2:end) .* sigmoidGradient(z2);
 
+% 估计误差
 Delta1 = delta2'*a1;
 Delta2 = delta3'*a2;
 
-Theta1_grad = Delta1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m;
+% 正则化
+Theta1_grad = Delta1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m; %theta0不需要正则化
 Theta2_grad = Delta2 / m + lambda*[zeros(num_labels , 1) Theta2(:,2:end)] / m;
 
 %G1 = zeros(size(Theta1));

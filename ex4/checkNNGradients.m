@@ -1,13 +1,13 @@
 function checkNNGradients(lambda)
 %CHECKNNGRADIENTS Creates a small neural network to check the
 %backpropagation gradients
-%这个函数创造一个小型神经网络用于检验反向传播梯度。
+%这个函数创造一个小型神经网络用于检验反向传播算法。
 %   CHECKNNGRADIENTS(lambda) Creates a small neural network to check the
 %   backpropagation gradients, it will output the analytical gradients
 %   produced by your backprop code and the numerical gradients (computed
 %   using computeNumericalGradient). These two gradient computations should
 %   result in very similar values.
-%	这个函数会通过反向传播代码和数值梯度输出分析梯度。这两个梯度最终应该非常相似。
+%	这个函数会通过反向传播算法和数值梯度输出分析梯度。这两个梯度最终应该非常相似，使得反向传播算法有效。
 
 if ~exist('lambda', 'var') || isempty(lambda)
     lambda = 0;
@@ -33,11 +33,11 @@ costFunc = @(p) nnCostFunction(p, input_layer_size, hidden_layer_size, ...
                                num_labels, X, y, lambda);
 
 [cost, grad] = costFunc(nn_params);
-numgrad = computeNumericalGradient(costFunc, nn_params);
+numgrad = computeNumericalGradient(costFunc, nn_params); % 计算数值的梯度。
 
 % Visually examine the two gradient computations.  The two columns
 % you get should be very similar. 
-disp([numgrad grad]);
+disp([numgrad grad]); % 对比反向传播得到的梯度和数值计算出的梯度。
 fprintf(['The above two columns you get should be very similar.\n' ...
          '(Left-Your Numerical Gradient, Right-Analytical Gradient)\n\n']);
 

@@ -14,14 +14,15 @@
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
 %
-
+%	这个神经网络用于数字识别。
+%
 %% Initialization
 clear ; close all; clc
 
 %% Setup the parameters you will use for this exercise
-input_layer_size  = 400;  % 20x20 Input Images of Digits
-hidden_layer_size = 25;   % 25 hidden units
-num_labels = 10;          % 10 labels, from 1 to 10   
+input_layer_size  = 400;  % 20x20 Input Images of Digits 像素20x20
+hidden_layer_size = 25;   % 25 hidden units 25个隐藏层
+num_labels = 10;          % 10 labels, from 1 to 10   识别10个数字
                           % (note that we have mapped "0" to label 10)
 
 %% =========== Part 1: Loading and Visualizing Data =============
@@ -29,7 +30,7 @@ num_labels = 10;          % 10 labels, from 1 to 10
 %  You will be working with a dataset that contains handwritten digits.
 %
 
-% Load Training Data
+% Load Training Data 加载训练数据
 fprintf('Loading and Visualizing Data ...\n')
 
 load('ex4data1.mat');
@@ -51,13 +52,13 @@ pause;
 
 fprintf('\nLoading Saved Neural Network Parameters ...\n')
 
-% Load the weights into variables Theta1 and Theta2
+% Load the weights into variables Theta1 and Theta2 随机初始化权重矩阵。权重不可全为0，避免所有权重是同一值。
 load('ex4weights.mat');
 
-% Unroll parameters 
+% Unroll parameters 平铺参数矩阵
 nn_params = [Theta1(:) ; Theta2(:)];
 
-%% ================ Part 3: Compute Cost (Feedforward) ================
+%% ================ Part 3: Compute Cost (Feedforward) ================计算成本，前向传播
 %  To the neural network, you should first start by implementing the
 %  feedforward part of the neural network that returns the cost only. You
 %  should complete the code in nnCostFunction.m to return cost. After
@@ -71,7 +72,7 @@ nn_params = [Theta1(:) ; Theta2(:)];
 %
 fprintf('\nFeedforward Using Neural Network ...\n')
 
-% Weight regularization parameter (we set this to 0 here).
+% Weight regularization parameter (we set this to 0 here). 权重正则化
 lambda = 0;
 
 J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
@@ -144,7 +145,7 @@ initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 fprintf('\nChecking Backpropagation... \n');
 
 %  Check gradients by running checkNNGradients
-checkNNGradients;
+checkNNGradients; %检验反向传播算法。
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -159,7 +160,7 @@ fprintf('\nChecking Backpropagation (w/ Regularization) ... \n')
 
 %  Check gradients by running checkNNGradients
 lambda = 3;
-checkNNGradients(lambda);
+checkNNGradients(lambda); %正则化之后检验反向传播算法。
 
 % Also output the costFunction debugging values
 debug_J  = nnCostFunction(nn_params, input_layer_size, ...
