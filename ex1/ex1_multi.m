@@ -29,19 +29,19 @@
 %% ================ Part 1: Feature Normalization ================
 
 %% Clear and Close Figures
-clear all; close all; clc
+clear all; close all; clc	% 清除变量，清理工作区，清屏命令行
 
 fprintf('Loading data ...\n');
 
 %% Load Data
 data = csvread('ex1data2.txt');
-X = data(:, 1:2);
-y = data(:, 3);
-m = length(y);
+X = data(:, 1:2);	% 2个特征，X是1到2列所有行
+y = data(:, 3);		% y是第3列所有行
+m = length(y);		% m是训练集大小
 
 % Print out some data points
-fprintf('First 10 examples from the dataset: \n');
-fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');
+fprintf('First 10 examples from the dataset: \n');		% 展示数据集前10个样本
+fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10, :) y(1:10, :)]');
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
