@@ -14,12 +14,12 @@ p = zeros(m, 1);
 %               your learned logistic regression parameters. 
 %               You should set p to a vector of 0's and 1's
 %
-Hx = sigmoid(X*theta);
-for iter=1:m % 感知器算法
-	if Hx(iter)>=0.5
-		p(iter)=1;
+Hx = sigmoid(X * theta);
+for iter=1:m 	% 感知器算法
+	if Hx(iter) >= 0.5
+		p(iter) = 1;
 	else
-		p(iter)=0;
+		p(iter) = 0;
 	end
 end
 

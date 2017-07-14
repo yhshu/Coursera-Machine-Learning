@@ -4,6 +4,7 @@ function [X_norm, mu, sigma] = featureNormalize(X)
 %   the mean value of each feature is 0 and the standard deviation
 %   is 1. This is often a good preprocessing step to do when
 %   working with learning algorithms.
+%	特征归一化
 
 % You need to set these values correctly
 X_norm = X;
@@ -26,15 +27,14 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 % 特征缩放feature scaling和均值归一mean normalization
-m = size(X , 1);% m是矩阵X的行数，size函数中1表示行数，2表示列数
-mu = mean(X);% mean函数求各列的平均值
-for i = 1 : m,
-	X_norm(i, :) = X(i , :) - mu; % 减去平均值
-end
 
-sigma = std(X);% std函数求标准偏差
+m = size(X, 1);			% m是矩阵X的行数，size函数中1表示行数，2表示列数
+mu = mean(X);			% mean函数求各列的平均值
+sigma = std(X);			% std函数求各列的标准差
+
 for i = 1 : m,
-	X_norm(i, :) = X_norm(i, :) ./ sigma; % 除以标准偏差
+	X_norm(i, :) = X(i, :) - mu; 			% 减去平均值
+	X_norm(i, :) = X_norm(i, :) ./ sigma; 	% 除以标准差
 end
 
 %mu , sigma , X_norm

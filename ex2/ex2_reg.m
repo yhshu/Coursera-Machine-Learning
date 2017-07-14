@@ -18,7 +18,7 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear ; close all; clc		% 清除变量，清理工作区，清屏命令行
 
 %% Load Data
 %  The first two columns contains the X values and the third column
@@ -55,13 +55,13 @@ hold off;
 
 % Note that mapFeature also adds a column of ones for us, so the intercept
 % term is handled
-X = mapFeature(X(:,1), X(:,2));
+X = mapFeature(X(:,1), X(:,2));		% 特征展开
 
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1
-lambda = 1;
+lambda = 1;		% 正则化参数lambda
 
 % Compute and display initial cost and gradient for regularized logistic
 % regression

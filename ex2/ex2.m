@@ -17,14 +17,15 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear ; close all; clc		% 清除变量，清理工作区，清屏命令行
 
 %% Load Data
 %  The first two columns contains the exam scores and the third column
 %  contains the label.
 
 data = load('ex2data1.txt');
-X = data(:, [1, 2]); y = data(:, 3);
+X = data(:, [1, 2]); 
+y = data(:, 3);
 
 %% ==================== Part 1: Plotting ====================
 %  We start the exercise by first plotting the data to understand the 
@@ -55,13 +56,13 @@ pause;
 %  costFunction.m
 
 %  Setup the data matrix appropriately, and add ones for the intercept term
-[m, n] = size(X);
+[m, n] = size(X);		% m是X行数，n是X列数。
 
 % Add intercept term to x and X_test
 X = [ones(m, 1) X];
 
 % Initialize fitting parameters
-initial_theta = zeros(n + 1, 1);%theta是(n+1)*1的矩阵
+initial_theta = zeros(n + 1, 1);	% theta是(n+1)维向量。
 
 % Compute and display initial cost and gradient
 [cost, grad] = costFunction(initial_theta, X, y);
@@ -91,12 +92,13 @@ pause;
 %  optimal parameters theta.
 
 %  Set options for fminunc
-options = optimset('GradObj', 'on', 'MaxIter', 400);%最多迭代400次
+options = optimset('GradObj', 'on', 'MaxIter', 400);	% 最多迭代400次
 
 %  Run fminunc to obtain the optimal theta
 %  This function will return theta and the cost 
 [theta, cost] = ...
-	fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);%使用了函数指针
+	fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);	
+	% fminunc是无约束非线性规划函数；求使costFunction最小的theta。
 
 % Print theta to screen
 fprintf('Cost at theta found by fminunc: %f\n', cost);

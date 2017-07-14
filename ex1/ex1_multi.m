@@ -49,10 +49,10 @@ pause;
 % Scale features and set them to zero mean
 fprintf('Normalizing Features ...\n');
 
-[X mu sigma] = featureNormalize(X);
+[X mu sigma] = featureNormalize(X);		% 特征缩放
 
 % Add intercept term to X
-X = [ones(m, 1) X];
+X = [ones(m, 1) X];						% 添加截距项
 
 
 %% ================ Part 2: Gradient Descent ================
@@ -82,18 +82,18 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.3;
-num_iters = 100;
+alpha = 0.3;		% 学习率
+num_iters = 100;	% 迭代次数
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
 [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 
 % Plot the convergence graph
-figure;
+figure;		% 打开显示图形的窗口
 plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
-xlabel('Number of iterations');
-ylabel('Cost J');
+xlabel('Number of iterations');		% x轴标签
+ylabel('Cost J');					% y轴标签
 
 % Display gradient descent's result
 fprintf('Theta computed from gradient descent: \n');
@@ -105,7 +105,6 @@ fprintf('\n');
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
 price = 0; % You should change this
-
 
 % ============================================================
 
@@ -136,7 +135,7 @@ y = data(:, 3);
 m = length(y);
 
 % Add intercept term to X
-X = [ones(m, 1) X];
+X = [ones(m, 1) X];		% 添加截距项到X
 
 % Calculate the parameters from the normal equation
 theta = normalEqn(X, y);
