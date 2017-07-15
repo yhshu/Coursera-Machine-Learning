@@ -74,16 +74,18 @@ Theta2_grad = zeros(size(Theta2)); % Theta2的梯度
 %               and Theta2_grad from Part 2.
 %
 
-X = [ones(m , 1)  X];
+X = [ones(m , 1)  X];		% X大小5000 x 401
 
 % Part 1: CostFunction 成本函数
 % -------------------------------------------------------------
 
-a1 = X; 					% 输入层
-z2 = a1 * Theta1'; 			% 第二层输入
+% Theta1大小25 x 401
+% Theta2大小10 x 26
+a1 = X; 					% 输入层 X大小5000 x 401
+z2 = a1 * Theta1'; 			% 第二层输入 z2大小5000 x 25
 a2 = sigmoid(z2); 			% 第二层输出
-a2 = [ones(m, 1) a2]; 		% 加入偏置神经元
-a3 = sigmoid(a2 * Theta2' );% 输出层 5000x10的矩阵
+a2 = [ones(m, 1) a2]; 		% 加入偏置神经元，加入后a2大小5000 x 26
+a3 = sigmoid(a2 * Theta2' );% 输出层 得到5000x10的矩阵
 
 ry = eye(num_labels)(y, :); % ry是5000x10的矩阵，y是5000x1的矩阵。
 
