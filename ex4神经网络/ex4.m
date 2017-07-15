@@ -37,7 +37,7 @@ load('ex4data1.mat');
 m = size(X, 1);
 
 % Randomly select 100 data points to display
-sel = randperm(size(X, 1));
+sel = randperm(size(X, 1));		% 随机置乱。
 sel = sel(1:100);
 
 displayData(X(sel, :));
@@ -58,7 +58,7 @@ load('ex4weights.mat');
 % Unroll parameters 平铺参数矩阵
 nn_params = [Theta1(:) ; Theta2(:)];
 
-%% ================ Part 3: Compute Cost (Feedforward) ================计算成本，前向传播
+%% ================ Part 3: Compute Cost (Feedforward) ================
 %  To the neural network, you should first start by implementing the
 %  feedforward part of the neural network that returns the cost only. You
 %  should complete the code in nnCostFunction.m to return cost. After
@@ -66,9 +66,13 @@ nn_params = [Theta1(:) ; Theta2(:)];
 %  your implementation is correct by verifying that you get the same cost
 %  as us for the fixed debugging parameters.
 %
+%  人工神经网络，首先需要开始执行前向传播，只返回代价。通过验证参数来验证
+%  前向传播是否正常。
+%
 %  We suggest implementing the feedforward cost *without* regularization
 %  first so that it will be easier for you to debug. Later, in part 4, you
 %  will get to implement the regularized cost.
+%  建议先不使用正则化，更容易debug。在之后的part4，会进行正则化。
 %
 fprintf('\nFeedforward Using Neural Network ...\n')
 
@@ -87,7 +91,7 @@ pause;
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
 %  continue to implement the regularization with the cost.
-%
+%  成本函数能正常执行后，应该加上正则化。
 
 fprintf('\nChecking Cost Function (w/ Regularization) ... \n')
 

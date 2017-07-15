@@ -10,7 +10,8 @@ function [J grad] = nnCostFunction(nn_params, ...
 %   parameters for the neural network are "unrolled" into the vector
 %   nn_params and need to be converted back into the weight matrices. 
 % 
-%	nnCostFunction函数用于计算神经网络的成本和梯度。神经网络的参数没有被展开到向量nn_params里，需要被转换回权重矩阵。
+%	nnCostFunction函数用于计算神经网络的成本和梯度。神经网络的参数没有被展开到
+%   向量nn_params里，需要被转换回权重矩阵。
 %   The returned parameter grad should be a "unrolled" vector of the
 %   partial derivatives of the neural network.
 %
@@ -18,6 +19,7 @@ function [J grad] = nnCostFunction(nn_params, ...
 % Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
 % for our 2 layer neural network
 % 重塑神经网络的权重矩阵。
+
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
@@ -25,7 +27,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
                  num_labels, (hidden_layer_size + 1));
 
 % Setup some useful variables
-m = size(X, 1);% m是X的行数，即样本数量。
+m = size(X, 1);	% m是X的行数，即样本数量。
          
 % You need to return the following variables correctly 
 J = 0;
@@ -77,20 +79,20 @@ X = [ones(m , 1)  X];
 % Part 1: CostFunction 成本函数
 % -------------------------------------------------------------
 
-a1 = X; %输入层
-z2 = a1*Theta1'; %第二层输入
-a2 = sigmoid(z2); %第二层输出
-a2 = [ones(m , 1)  a2]; %加入偏置神经元
-a3 = sigmoid(a2*Theta2'); %输出层 5000x10的矩阵
+a1 = X; 					% 输入层
+z2 = a1 * Theta1'; 			% 第二层输入
+a2 = sigmoid(z2); 			% 第二层输出
+a2 = [ones(m, 1) a2]; 		% 加入偏置神经元
+a3 = sigmoid(a2 * Theta2' );% 输出层 5000x10的矩阵
 
-ry = eye(num_labels)(y,:); % ry是5000x10的矩阵，y是5000x1的矩阵。
+ry = eye(num_labels)(y, :); % ry是5000x10的矩阵，y是5000x1的矩阵。
 
-cost = ry.*log(a3) + (1 - ry).*log(1 - a3); % 最大似然法。
-J = -sum(sum(cost,2)) / m; % 成本函数。
+cost = ry.* log(a3) + (1 - ry).* log(1 - a3); % 最大似然法。
+J = -sum(sum(cost,2)) / m; 	% 成本函数。
 
-reg = sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(: , 2:end).^2));
+reg = sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2));
 
-J = J + lambda/(2*m)*reg; %正则化
+J = J + lambda/(2 * m) * reg;% 正则化
 
 % -------------------------------------------------------------
 
@@ -98,7 +100,7 @@ J = J + lambda/(2*m)*reg; %正则化
 % -------------------------------------------------------------
 
 
-delta3 = a3 - ry; %第三层的误差
+delta3 = a3 - ry; % 第三层的误差
 delta2 = (delta3*Theta2)(:,2:end) .* sigmoidGradient(z2);
 
 % 估计误差
@@ -106,7 +108,7 @@ Delta1 = delta2'*a1;
 Delta2 = delta3'*a2;
 
 % 正则化
-Theta1_grad = Delta1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m; %theta0不需要正则化
+Theta1_grad = Delta1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m; % theta0不需要正则化
 Theta2_grad = Delta2 / m + lambda*[zeros(num_labels , 1) Theta2(:,2:end)] / m;
 
 %G1 = zeros(size(Theta1));

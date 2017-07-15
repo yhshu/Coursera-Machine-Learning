@@ -37,7 +37,7 @@ load('ex3data1.mat');
 m = size(X, 1);
 
 % Randomly select 100 data points to display
-sel = randperm(size(X, 1));
+sel = randperm(size(X, 1));		% 随机置乱。
 sel = sel(1:100);
 
 displayData(X(sel, :));
