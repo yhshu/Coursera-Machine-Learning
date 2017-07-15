@@ -1,7 +1,7 @@
 function [J, grad] = lrCostFunction(theta, X, y, lambda)
-%LRCOSTFUNCTION Compute cost and gradient for logistic regression with 
-%regularization
-%本函数用于计算带有正则化的逻辑回归的成本和梯度。
+% LRCOSTFUNCTION Compute cost and gradient for logistic regression with 
+% regularization
+% 计算带有正则化的逻辑斯蒂回归的成本和梯度。
 
 %   J = LRCOSTFUNCTION(theta, X, y, lambda) computes the cost of using
 %   theta as the parameter for regularized logistic regression and the
@@ -44,9 +44,9 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 h = sigmoid(X * theta);
-thetaFiltered = [0; theta(2: end)];%在theta第一行加入0
-J=(1/m)*( -y'*log(h) - (1-y')*log(1-h) ) + (lambda/(2*m))*(thetaFiltered' * thetaFiltered);
-grad=(1/m)*( X' * (h-y)) + ((lambda/m) * thetaFiltered);
+thetatmp = [0; theta(2: end)]; % 在theta第一行加入0
+J = (1/m) * (-y' * log(h) - (1-y') * log(1-h)) + (lambda / (2 * m)) * (thetatmp' * thetatmp);
+grad = (1/m) * ( X' * (h-y)) + ((lambda/m) * thetatmp);
 
 % =============================================================
 

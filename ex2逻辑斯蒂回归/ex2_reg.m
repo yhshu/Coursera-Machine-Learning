@@ -114,7 +114,8 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 % Optimize
 [theta, J, exit_flag] = ...
 	fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
-
+	% fminunc是无约束非线性规划函数；求使costFunction最小的theta。
+	
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
 hold on;

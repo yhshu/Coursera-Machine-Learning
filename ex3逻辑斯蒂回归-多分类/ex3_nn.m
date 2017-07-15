@@ -71,7 +71,7 @@ pause;
 %  through the examples one at the a time to see what it is predicting.
 
 %  Randomly permute examples
-rp = randperm(m);
+rp = randperm(m);		% 生成随机数序列
 
 for i = 1:m
     % Display 

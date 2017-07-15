@@ -21,11 +21,11 @@ p = zeros(m, 1); % 每个样本得到一个结果
 %       information see 'help max'. If your examples are in rows, then, you
 %       can use max(A, [], 2) to obtain the max for each row.
 %
-A1 = [ones(1,m); X' ];
+A1 = [ones(1, m); X' ];
 X2 = sigmoid(Theta1 * A1);
-A2 = [ones(1,m); X2 ];
+A2 = [ones(1, m); X2 ];
 A3 = sigmoid(Theta2 * A2);
-[x,xi] = max(A3' , [], 2); %max函数用于获取每一行的最大值。
+[x, xi] = max(A3' , [], 2); 	% max函数用于获取每一行的最大值。
 p = xi;
 
 % =========================================================================

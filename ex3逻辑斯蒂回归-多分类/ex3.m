@@ -17,12 +17,12 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear ; close all; clc		% 清除变量，清理工作区，清屏命令行
 
 %% Setup the parameters you will use for this part of the exercise
-input_layer_size  = 400;  % 20x20 Input Images of Digits
-num_labels = 10;          % 10 labels, from 1 to 10
-                          % (note that we have mapped "0" to label 10)
+input_layer_size  = 400;  	% 20x20 Input Images of Digits
+num_labels = 10;          	% 10 labels, from 1 to 10
+							% (note that we have mapped "0" to label 10)
 
 %% =========== Part 1: Loading and Visualizing Data =============
 %  We start the exercise by first loading and visualizing the dataset.
@@ -32,12 +32,12 @@ num_labels = 10;          % 10 labels, from 1 to 10
 % Load Training Data
 fprintf('Loading and Visualizing Data ...\n')
 
-load('ex3data1.mat'); % training data stored in arrays X, y
-m = size(X, 1);
+load('ex3data1.mat'); 		% training data stored in arrays X, y
+m = size(X, 1);				% m是样本数
 
 % Randomly select 100 data points to display
 rand_indices = randperm(m); % randperm函数用于随机打乱一个数字序列。
-sel = X(rand_indices(1:100), :); % 取100行所有的列
+sel = X(rand_indices(1:100), :); % 取随机选取的100行中所有的列
 
 displayData(sel);
 
