@@ -3,7 +3,7 @@ Coursera Stanford University Machine Learning Course assignments, written by MAT
 
 Eight parts in total.
 
-## ex1 linear Regression
+## ex1 Linear Regression
 Linear regression with single variables and linear regression of bivariate.
 
 ## ex2 Logistic Regression
@@ -11,7 +11,7 @@ Include regularized logistic regression.
 
 ## ex3 Logistic Regression - Multi Classification
 
-## ex4 neural network
+## ex4 Neural Network
 A three-layer neural network was established to solve the classification problem.
 
-## ex5 regularized linear regression and deviation variance
+## ex5 Regularized Linear Regression and Deviation Variance
