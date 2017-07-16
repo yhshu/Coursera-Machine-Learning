@@ -66,7 +66,7 @@ nn_params = [Theta1(:) ; Theta2(:)];
 %  your implementation is correct by verifying that you get the same cost
 %  as us for the fixed debugging parameters.
 %
-%  人工神经网络，首先需要开始执行前向传播，只返回代价。通过验证参数来验证
+%  人工神经网络，首先需要开始实现前向传播，只返回代价。通过验证参数来验证
 %  前向传播是否正常。
 %
 %  We suggest implementing the feedforward cost *without* regularization
@@ -91,7 +91,7 @@ pause;
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
 %  continue to implement the regularization with the cost.
-%  成本函数能正常执行后，应该加上正则化。
+%  成本函数正常地实现后，应该加上正则化。
 
 fprintf('\nChecking Cost Function (w/ Regularization) ... \n')
 
@@ -112,7 +112,7 @@ pause;
 %  Before you start implementing the neural network, you will first
 %  implement the gradient for the sigmoid function. You should complete the
 %  code in the sigmoidGradient.m file.
-%
+%  在开始实现神经网络前，需要首先计算sigmoid函数的梯度。
 
 fprintf('\nEvaluating sigmoid gradient...\n')
 
@@ -130,7 +130,7 @@ pause;
 %  layer neural network that classifies digits. You will start by
 %  implementing a function to initialize the weights of the neural network
 %  (randInitializeWeights.m)
-
+%  你应开始实现用于分类数字的两层神经网络。先为神经网络的权重矩阵初始化。
 fprintf('\nInitializing Neural Network Parameters ...\n')
 
 initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size);
@@ -145,11 +145,12 @@ initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 %  backpropagation algorithm for the neural network. You should add to the
 %  code you've written in nnCostFunction.m to return the partial
 %  derivatives of the parameters.
-%
+%  在你计算的成本与给定的相符后，你应继续实现反向传播算法。
+
 fprintf('\nChecking Backpropagation... \n');
 
 %  Check gradients by running checkNNGradients
-checkNNGradients; %检验反向传播算法。
+checkNNGradients; % 检验反向传播算法。
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -158,13 +159,13 @@ pause;
 %% =============== Part 8: Implement Regularization ===============
 %  Once your backpropagation implementation is correct, you should now
 %  continue to implement the regularization with the cost and gradient.
-%
+%  反向传播算法正确实现后，应继续实现正则化。
 
 fprintf('\nChecking Backpropagation (w/ Regularization) ... \n')
 
 %  Check gradients by running checkNNGradients
 lambda = 3;
-checkNNGradients(lambda); %正则化之后检验反向传播算法。
+checkNNGradients(lambda); % 正则化之后检验反向传播算法。
 
 % Also output the costFunction debugging values
 debug_J  = nnCostFunction(nn_params, input_layer_size, ...

@@ -87,12 +87,13 @@ a2 = sigmoid(z2); 			% 第二层输出
 a2 = [ones(m, 1) a2]; 		% 加入偏置神经元，加入后a2大小5000 x 26
 a3 = sigmoid(a2 * Theta2' );% 输出层 得到5000x10的矩阵
 
-ry = eye(num_labels)(y, :); % ry是5000x10的矩阵，y是5000x1的矩阵。
+ry = eye(num_labels)(y, :); % ry大小5000 x 10的矩阵，y大小5000 x 1。
+% 根据y生成一个由0和1组成的矩阵，若y向量第i行是j，则ry第i行第j列是1，其余元素是0.
 
-cost = ry.* log(a3) + (1 - ry).* log(1 - a3); % 最大似然法。
-J = -sum(sum(cost,2)) / m; 	% 成本函数。
+cost = ry.* log(a3) + (1 - ry).* log(1 - a3); % 似然函数。
+J = -sum(sum(cost, 2)) / m; 	% 求和得成本函数。
 
-reg = sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2));
+reg = sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)); % 对所有特征进行惩罚，不包括theta(0)
 
 J = J + lambda/(2 * m) * reg;% 正则化
 
@@ -103,42 +104,19 @@ J = J + lambda/(2 * m) * reg;% 正则化
 
 
 delta3 = a3 - ry; % 第三层的误差
-delta2 = (delta3*Theta2)(:,2:end) .* sigmoidGradient(z2);
+delta2 = (delta3 * Theta2)(:, 2:end) .* sigmoidGradient(z2);
 
 % 估计误差
-Delta1 = delta2'*a1;
-Delta2 = delta3'*a2;
+Delta1 = delta2' * a1;
+Delta2 = delta3' * a2;
 
 % 正则化
-Theta1_grad = Delta1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m; % theta0不需要正则化
-Theta2_grad = Delta2 / m + lambda*[zeros(num_labels , 1) Theta2(:,2:end)] / m;
-
-%G1 = zeros(size(Theta1));
-%G2 = zeros(size(Theta2));
-%for i = 1 : m,
-%	ra1 = X(i,:)';
-%	rz2 = Theta1*ra1;
-%	ra2 = sigmoid(rz2);
-%	ra2 = [1;ra2];
-%	rz3 = Theta2*ra2;
-%	ra3 = sigmoid(rz3);
-	
-%	err3 = ra3 - ry(i,:)';
-	
-%	err2 = (Theta2'*err3)(2:end , 1) .* sigmoidGradient(rz2);
-	
-%	G1 = G1 + err2 * ra1';
-%	G2 = G2 + err3 * ra2';
-%end
-
-
-%Theta1_grad = G1 / m + lambda*[zeros(hidden_layer_size , 1) Theta1(:,2:end)] / m;
-%Theta2_grad = G2 / m + lambda*[zeros(num_labels , 1) Theta2(:,2:end)] / m;
+Theta1_grad = Delta1 / m + lambda * [zeros(hidden_layer_size, 1) Theta1(: ,2:end)] / m; % theta0不需要正则化
+Theta2_grad = Delta2 / m + lambda * [zeros(num_labels, 1) Theta2(: ,2:end)] / m;
 
 % =========================================================================
 
 % Unroll gradients 展示梯度
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end

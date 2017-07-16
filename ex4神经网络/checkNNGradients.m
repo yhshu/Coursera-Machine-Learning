@@ -7,7 +7,8 @@ function checkNNGradients(lambda)
 %   produced by your backprop code and the numerical gradients (computed
 %   using computeNumericalGradient). These two gradient computations should
 %   result in very similar values.
-%	这个函数会通过反向传播算法和数值梯度输出分析梯度。这两个梯度最终应该非常相似，使得反向传播算法有效。
+%	这个函数会通过反向传播算法和数值梯度输出分析梯度。这两个梯度最终应该
+%   非常相似，使得反向传播算法有效。
 
 if ~exist('lambda', 'var') || isempty(lambda)
     lambda = 0;
