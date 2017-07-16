@@ -1,16 +1,17 @@
 # Coursera Machine Learning
-Coursera斯坦福大学机器学习课程的作业，使用MATLAB编写。
+Coursera Stanford University Machine Learning Course assignments, written by MATLAB.
 
-共8个部分。
+Eight parts in total.
 
-## ex1 线性回归
-包含单变量的线性回归与双变量的线性回归。
+## ex1 linear Regression
+Linear regression with single variables and linear regression of bivariate.
 
-## ex2 逻辑斯蒂回归
-包含正则化的逻辑斯蒂回归。
+## ex2 Logistic Regression
+Include regularized logistic regression.
 
-## ex3 逻辑斯蒂回归-多分类
+## ex3 Logistic Regression - Multi Classification
 
-## ex4 神经网络
-建立了一个三层的神经网络用于解决分类问题。
-## ex5 正则化线性回归与偏差方差
+## ex4 neural network
+A three-layer neural network was established to solve the classification problem.
+
+## ex5 regularized linear regression and deviation variance
