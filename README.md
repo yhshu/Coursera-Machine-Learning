@@ -1,5 +1,5 @@
 # Coursera Machine Learning
-Coursera Stanford University Machine Learning Course assignments, written by MATLAB.
+Coursera Stanford University Machine Learning Course assignments, written by **MATLAB**.
 
 Eight parts in total.
 
