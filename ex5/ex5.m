@@ -16,7 +16,7 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear ; close all; clc		% 清除所有变量；关闭所有窗口；清理控制台
 
 %% =========== Part 1: Loading and Visualizing Data =============
 %  We start the exercise by first loading and visualizing the dataset. 
@@ -32,7 +32,7 @@ fprintf('Loading and Visualizing Data ...\n')
 load ('ex5data1.mat');
 
 % m = Number of examples
-m = size(X, 1);
+m = size(X, 1);				% 样本数量
 
 % Plot training data
 plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
@@ -90,7 +90,7 @@ plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
 xlabel('Change in water level (x)');
 ylabel('Water flowing out of the dam (y)');
 hold on;
-plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
+plot(X, [ones(m, 1) X] * theta, '--', 'LineWidth', 2)
 hold off;
 
 fprintf('Program paused. Press enter to continue.\n');

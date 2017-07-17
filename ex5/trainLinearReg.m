@@ -4,10 +4,10 @@ function [theta] = trainLinearReg(X, y, lambda)
 %   [theta] = TRAINLINEARREG (X, y, lambda) trains linear regression using
 %   the dataset (X, y) and regularization parameter lambda. Returns the
 %   trained parameters theta.
-%
+%	训练线性回归，并正则化。
 
 % Initialize Theta
-initial_theta = zeros(size(X, 2), 1); 
+initial_theta = zeros(size(X, 2), 1);	% 列向量，长度为特征个数 
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(t) linearRegCostFunction(X, y, t, lambda);

@@ -38,16 +38,12 @@ error_val = zeros(length(lambda_vec), 1);
 %       end
 %
 %
-for i = 1:1:length(lambda_vec)
+for i = 1:length(lambda_vec)
     lambda = lambda_vec(i);
     % Compute train/cross validation errors using training examples X(1:i, :) and y(1:i)
-    [theta] = trainLinearReg([ones(size(X, 1),1) X],y,lambda);
-    J_train = linearRegCostFunction([ones(size(X, 1), 1) X], y, theta, 0);
-    J_val = linearRegCostFunction([ones(size(Xval, 1), 1) Xval], yval, theta, 0);
-    
-    % storing the result in error_train(i) and error_val(i)
-    error_train(i) = J_train;
-    error_val(i) = J_val;
+    [theta] = trainLinearReg([ones(size(X, 1), 1) X], y, lambda);
+    error_train(i) = linearRegCostFunction([ones(size(X, 1), 1) X], y, theta, 0);  % 训练集误差
+    error_val(i) = linearRegCostFunction([ones(size(Xval, 1), 1) Xval], yval, theta, 0);  % 验证集误差
 
 end
 

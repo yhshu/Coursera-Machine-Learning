@@ -18,14 +18,14 @@ grad = zeros(size(theta));
 %
 %               You should set J to the cost and grad to the gradient.
 %
-H=X*theta;
+H = X * theta;	% 预测值
 J = sum((H - y) .^ 2) / (2 * m) + (sum(theta(2:size(theta)) .^ 2)) * lambda / (2 * m);
 
-grad(1)= X(:,1)' * (H - y) / m; %grad(1)与其他项不同
-grad(2:size(grad)) = X(:,2:size(grad))' * (H - y) / m + theta(2:size(theta)) * lambda / m;
+grad(1)= X(: ,1)' * (H - y) / m; % grad(1)没有正则项，因为theta0不正则化
+grad(2:size(grad)) = X(: ,2:size(grad))' * (H - y) / m + theta(2:size(theta)) * lambda / m;
 
 % =========================================================================
 
-grad = grad(:);
+grad = grad(:);	% grad元素按列排列
 
 end
