@@ -2,6 +2,7 @@ function [model] = svmTrain(X, Y, C, kernelFunction, ...
                             tol, max_passes)
 %SVMTRAIN Trains an SVM classifier using a simplified version of the SMO 
 %algorithm. 
+%   使用简单的SMO算法训练一个支持向量机分类器。
 %   [model] = SVMTRAIN(X, Y, C, kernelFunction, tol, max_passes) trains an
 %   SVM classifier and returns trained model. X is the matrix of training 
 %   examples.  Each row is a training example, and the jth column holds the 
@@ -10,6 +11,9 @@ function [model] = svmTrain(X, Y, C, kernelFunction, ...
 %   parameter.  tol is a tolerance value used for determining equality of 
 %   floating point numbers. max_passes controls the number of iterations
 %   over the dataset (without changes to alpha) before the algorithm quits.
+%	训练一个SVM分类器并返回训练好的模型。X是训练集矩阵。每一行是一个训练样本，
+%	第j列记录第j个特征。Y是列向量，1与0表示类别。C是标准支持向量机正则化参数。
+%	tol
 %
 % Note: This is a simplified version of the SMO algorithm for training
 %       SVMs. In practice, if you want to train an SVM classifier, we

@@ -1,5 +1,6 @@
 %% Machine Learning Online Class
 %  Exercise 6 | Support Vector Machines
+%  支持向量机
 %
 %  Instructions
 %  ------------
@@ -40,7 +41,7 @@ pause;
 %% ==================== Part 2: Training Linear SVM ====================
 %  The following code will train a linear SVM on the dataset and plot the
 %  decision boundary learned.
-%
+%  下面的代码将根据数据集训练一个线性支持向量机并绘制所学习的决策边界。
 
 % Load from ex6data1: 
 % You will have X, y in your environment

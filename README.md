@@ -15,3 +15,5 @@ Include regularized logistic regression.
 A three-layer neural network was established to solve the classification problem.
 
 ## ex5 Regularized Linear Regression and Deviation Variance
+
+## ex6 Support Vector Machines
