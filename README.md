@@ -20,4 +20,4 @@ A three-layer neural network was established to solve the classification problem
 
 ## ex7 Principle Component Analysis and K-Means Clustering
 
-## ex8 Anomaly Detection and Collaborative Filtering 
+## ex8 Anomaly Detection and Collaborative Filtering
