@@ -1,5 +1,6 @@
 %% Machine Learning Online Class
 %  Exercise 7 | Principle Component Analysis and K-Means Clustering
+%  主成分分析与K-均值聚类
 %
 %  Instructions
 %  ------------
@@ -33,7 +34,7 @@ load('ex7data2.mat');
 
 % Select an initial set of centroids
 K = 3; % 3 Centroids
-initial_centroids = [3 3; 6 2; 8 5];
+initial_centroids = [3 3; 6 2; 8 5];	% 初始化质心
 
 % Find the closest centroids for the examples using the
 % initial_centroids
@@ -71,7 +72,9 @@ pause;
 %  findClosestCentroids, you have all the necessary pieces to run the
 %  kMeans algorithm. In this part, you will run the K-Means algorithm on
 %  the example dataset we have provided. 
-%
+%  在你实现computeCentroids和findClosestCentroids函数之后，你已有运行K-均值
+%  聚类算法的所有必要条件。在这部分，你将在我们给定的样例数据集上运行K-均值
+%  算法。
 fprintf('\nRunning K-Means clustering on example dataset.\n\n');
 
 % Load an example dataset
@@ -101,7 +104,8 @@ pause;
 %  then you will map each pixel onto its closest centroid.
 %  
 %  You should now complete the code in kMeansInitCentroids.m
-%
+%  在这个练习中，你将使用K-均值算法压缩一个图像。为了完成这个，你将第一次
+%  在彩色像素图上运行K-均值算法，然后你会将每个像素归类到最近的质心。
 
 fprintf('\nRunning K-Means clustering on pixels from an image.\n\n');
 

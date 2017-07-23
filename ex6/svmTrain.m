@@ -13,11 +13,14 @@ function [model] = svmTrain(X, Y, C, kernelFunction, ...
 %   over the dataset (without changes to alpha) before the algorithm quits.
 %	训练一个SVM分类器并返回训练好的模型。X是训练集矩阵。每一行是一个训练样本，
 %	第j列记录第j个特征。Y是列向量，1与0表示类别。C是标准支持向量机正则化参数。
-%	tol
+%	tol是用于确定浮点数相等的公差值。在算法退出之前，max_passes控制数据集上的
+%	迭代次数（不改变alpha）。
 %
 % Note: This is a simplified version of the SMO algorithm for training
 %       SVMs. In practice, if you want to train an SVM classifier, we
 %       recommend using an optimized package such as:  
+%		这是一个用于训练支持向量机的简化版SMO算法。如果你想训练支持向量机
+%		分类器，我们建议使用如下的优化包。
 %
 %           LIBSVM   (http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 %           SVMLight (http://svmlight.joachims.org/)

@@ -85,7 +85,8 @@ a1 = X; 					% 输入层 X大小5000 x 401
 z2 = a1 * Theta1'; 			% 第二层输入 z2大小5000 x 25
 a2 = sigmoid(z2); 			% 第二层输出
 a2 = [ones(m, 1) a2]; 		% 加入偏置神经元，加入后a2大小5000 x 26
-a3 = sigmoid(a2 * Theta2' );% 输出层 得到5000x10的矩阵
+z3 = a2 * Theta2'			% 第三层输入 z3大小5000 x 10
+a3 = sigmoid(z3);			% 输出层 得到5000 x 10的矩阵
 
 ry = eye(num_labels)(y, :); % ry大小5000 x 10的矩阵，y大小5000 x 1。
 % 根据y生成一个由0和1组成的矩阵，若y向量第i行是j，则ry第i行第j列是1，其余元素是0.
@@ -103,12 +104,12 @@ J = J + lambda/(2 * m) * reg;% 正则化
 % -------------------------------------------------------------
 
 
-delta3 = a3 - ry; % 第三层的误差
-delta2 = (delta3 * Theta2)(:, 2:end) .* sigmoidGradient(z2);
+Error3 = a3 - ry; % 第三层的误差
+Error2 = (Error3 * Theta2)(:, 2:end) .* sigmoidGradient(z2);	% 第二层的误差
 
 % 估计误差
-Delta1 = delta2' * a1;
-Delta2 = delta3' * a2;
+Delta1 = Error2' * a1;
+Delta2 = Error3' * a2;
 
 % 正则化
 Theta1_grad = Delta1 / m + lambda * [zeros(hidden_layer_size, 1) Theta1(: ,2:end)] / m; % theta0不需要正则化
