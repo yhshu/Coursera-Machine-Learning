@@ -1,6 +1,6 @@
 %% Machine Learning Online Class
 %  Exercise 8 | Anomaly Detection and Collaborative Filtering
-%
+%  异常检测和协同过滤
 %  Instructions
 %  ------------
 %
@@ -26,10 +26,12 @@ load ('ex8_movies.mat');
 
 %  Y is a 1682x943 matrix, containing ratings (1-5) of 1682 movies on 
 %  943 users
+%  Y包含五个等级的1682个电影与943个用户。
 %
 %  R is a 1682x943 matrix, where R(i,j) = 1 if and only if user j gave a
 %  rating to movie i
-
+%  如果用户j给电影i平分，则R(i,j)是1.
+%
 %  From the matrix, we can compute statistics like average rating.
 fprintf('Average rating for movie 1 (Toy Story): %f / 5\n\n', ...
         mean(Y(1, R(1, :))));
@@ -47,12 +49,15 @@ pause;
 %  To help you debug your cost function, we have included set of weights
 %  that we trained on that. Specifically, you should complete the code in 
 %  cofiCostFunc.m to return J.
-
+%  你现在将实现协同过滤的成本函数。为了帮助你调试你的成本函数，我们已提供
+%  训练好的Theta集合。特别地，你应该在cofiCostFunc.m中完成代码，返回代价函
+%  数J。
+%
 %  Load pre-trained weights (X, Theta, num_users, num_movies, num_features)
 load ('ex8_movieParams.mat');
 
 %  Reduce the data set size so that this runs faster
-num_users = 4; num_movies = 5; num_features = 3;
+num_users = 4; num_movies = 5; num_features = 3;	% 裁剪数据集使算法运行更快
 X = X(1:num_movies, 1:num_features);
 Theta = Theta(1:num_users, 1:num_features);
 Y = Y(1:num_movies, 1:num_users);

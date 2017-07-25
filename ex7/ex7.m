@@ -149,7 +149,7 @@ pause;
 
 fprintf('\nApplying K-Means to compress an image.\n\n');
 
-% Find closest cluster members
+% Find closest cluster members 找到最近的聚类
 idx = findClosestCentroids(X, centroids);
 
 % Essentially, now we have represented the image X as in terms of the
@@ -157,7 +157,7 @@ idx = findClosestCentroids(X, centroids);
 
 % We can now recover the image from the indices (idx) by mapping each pixel
 % (specified by its index in idx) to the centroid value
-X_recovered = centroids(idx,:);
+X_recovered = centroids(idx, :);
 
 % Reshape the recovered image into proper dimensions
 X_recovered = reshape(X_recovered, img_size(1), img_size(2), 3);

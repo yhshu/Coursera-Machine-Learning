@@ -11,7 +11,12 @@ function [centroids, idx] = runkMeans(X, initial_centroids, ...
 %   learning happens. This is set to false by default. runkMeans returns 
 %   centroids, a Kxn matrix of the computed centroids and idx, a m x 1 
 %   vector of centroid assignments (i.e. each entry in range [1..K])
-%
+%   RUNKMEANS对数据矩阵运行K-均值算法，X的每一行是一个样本。它使用
+%	initial_centroids作为初始化的质心。max_iters指定了K-均值算法迭
+%	代的次数。plot_progress是一个真假标志，表示该函数是否应该随着学
+%	习进程而绘制其进度，默认设置为false。runkMeans返回质心，一个学习
+%	得来的K x n的矩阵。idx是一个m维列向量，用于标识给每个样本指定的
+%	质心。
 
 % Set default value for plot progress
 if ~exist('plot_progress', 'var') || isempty(plot_progress)
