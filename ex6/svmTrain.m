@@ -40,7 +40,8 @@ m = size(X, 1);
 n = size(X, 2);
 
 % Map 0 to -1
-Y(Y==0) = -1;
+% 将标签0修改为标签-1
+Y(Y==0) = -1; 
 
 % Variables
 alphas = zeros(m, 1);
@@ -54,7 +55,7 @@ H = 0;
 % Pre-compute the Kernel Matrix since our dataset is small
 % (in practice, optimized SVM packages that handle large datasets
 %  gracefully will _not_ do this)
-% 
+% 数据集较小，预计算核矩阵；实际运用中，针对大数据集不会做这一步。
 % We have implemented optimized vectorized version of the Kernels here so
 % that the svm training will run faster.
 if strcmp(func2str(kernelFunction), 'linearKernel')
@@ -64,7 +65,7 @@ if strcmp(func2str(kernelFunction), 'linearKernel')
 elseif strfind(func2str(kernelFunction), 'gaussianKernel')
     % Vectorized RBF Kernel
     % This is equivalent to computing the kernel on every pair of examples
-    X2 = sum(X.^2, 2);
+    X2 = sum(X.^2, 2); % 按行求和
     K = bsxfun(@plus, X2, bsxfun(@plus, X2', - 2 * (X * X')));
     K = kernelFunction(1, 0) .^ K;
 else
@@ -74,7 +75,7 @@ else
     for i = 1:m
         for j = i:m
              K(i,j) = kernelFunction(X(i,:)', X(j,:)');
-             K(j,i) = K(i,j); %the matrix is symmetric
+             K(j,i) = K(i,j); %the matrix is symmetric % 对称矩阵
         end
     end
 end
@@ -82,26 +83,26 @@ end
 % Train
 fprintf('\nTraining ...');
 dots = 12;
-while passes < max_passes,
+while passes < max_passes, % 最大迭代次数以内
             
-    num_changed_alphas = 0;
+    num_changed_alphas = 0; % 发生alpha被改变的情况的迭代次数
     for i = 1:m,
         
         % Calculate Ei = f(x(i)) - y(i) using (2). 
         % E(i) = b + sum (X(i, :) * (repmat(alphas.*Y,1,n).*X)') - Y(i);
-        E(i) = b + sum (alphas.*Y.*K(:,i)) - Y(i);
+        E(i) = b + sum (alphas .* Y .* K(:,i)) - Y(i);
         
-        if ((Y(i)*E(i) < -tol && alphas(i) < C) || (Y(i)*E(i) > tol && alphas(i) > 0)),
+        if ((Y(i) * E(i) < -tol && alphas(i) < C) || (Y(i) * E(i) > tol && alphas(i) > 0)),
             
             % In practice, there are many heuristics one can use to select
             % the i and j. In this simplified code, we select them randomly.
-            j = ceil(m * rand());
+            j = ceil(m * rand()); % 随机选择j，保证j与i不同；ceil函数向右取整
             while j == i,  % Make sure i \neq j
                 j = ceil(m * rand());
             end
 
             % Calculate Ej = f(x(j)) - y(j) using (2).
-            E(j) = b + sum (alphas.*Y.*K(:,j)) - Y(j);
+            E(j) = b + sum (alphas .* Y .* K(:,j)) - Y(j);
 
             % Save old alphas
             alpha_i_old = alphas(i);
