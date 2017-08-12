@@ -95,9 +95,10 @@ while passes < max_passes, % 最大迭代次数以内
         % E(i) = b + sum (X(i, :) * (repmat(alphas.*Y,1,n).*X)') - Y(i);
 		% 预测值f(x(i))是 b + sum(alphas .* Y .* K(:, i))
         E(i) = b + sum(alphas .* Y .* K(:, i)) - Y(i);
-		% 选择 i 的条件
+		% 选择 i 时需要考虑
+		% 如果误差很大，可考虑对 alpha 优化；对正间隔和负间隔都应测试
+		% 如果 alphas(i) 已经在决策边界上，即等于0 或 C，就不必再优化
         if ((Y(i) * E(i) < -tol && alphas(i) < C) || (Y(i) * E(i) > tol && alphas(i) > 0)),
-            
             % In practice, there are many heuristics one can use to select
             % the i and j. In this simplified code, we select them randomly.
 			% 实际运用中，有许多启发式的方法去选择 i 和 j，此处我们随机选择。
