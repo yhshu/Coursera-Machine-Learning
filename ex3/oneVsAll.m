@@ -54,7 +54,7 @@ X = [ones(m, 1) X]; % 为常数项多加一列
 %                 initial_theta, options);
 %
 for k = 1:num_labels 				% 循环num_labels次，循环一次区分出每一种类型。
-    initial_theta=zeros(n + 1, 1); 	% 初始化theta
+    initial_theta = zeros(n + 1, 1); 	% 初始化theta
     options = optimset('GradObj', 'on', 'MaxIter', 50);
 	% 最多迭代50次。
     [theta] = fmincg(@(t)(lrCostFunction(t, X, (y==k), lambda)), initial_theta, options);
