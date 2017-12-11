@@ -1,5 +1,5 @@
 # Coursera Machine Learning
-Coursera Stanford University Machine Learning Course assignments, written by **MATLAB**.
+Coursera assignments of Machine Learning Course taught by Andrew Ng from Stanford University, codes are written by **MATLAB** with **Chinese code comments**.
 
 Eight parts in total.
 
